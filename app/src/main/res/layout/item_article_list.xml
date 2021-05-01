@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+                name="listener"
+                type="com.android.articleapp.view.listeners.OnItemClickListener" />
+
+        <variable
+                name="article"
+                type="com.android.articleapp.data.model.Article" />
+    </data>
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:onClick="@{() -> listener.onItemClicked(article)}"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+        <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:contentDescription="@string/content_dummy_image"
+                android:scaleType="centerCrop"
+                app:loadArticleImage="@{article.thumbnailImage}"
+                app:isCircle="@{true}"
+                android:src="@drawable/ic_circle_article" />
+
+
+
+            <TextView
+                    android:id="@+id/titleTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{article.title}"
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp"
+                    android:layout_toStartOf="@id/arrow"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_toEndOf="@+id/imageView"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto_regular" />
+
+            <TextView
+                    android:id="@+id/authorsTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_toEndOf="@id/imageView"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:layout_toStartOf="@id/arrow"
+                    android:layout_below="@+id/titleTxt"
+                    android:text="@{article.byline}"
+                    android:textColor="@color/textColor"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/roboto_light" />
+
+        <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_calendar"
+                android:layout_toStartOf="@+id/timeTxt"
+                android:layout_alignTop="@+id/timeTxt"
+                android:layout_alignBottom="@+id/timeTxt"
+                android:contentDescription="@string/content_calender_image"
+                />
+
+        <TextView
+                android:id="@+id/timeTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginTop="2dp"
+                android:layout_below="@+id/authorsTxt"
+                android:layout_toStartOf="@+id/arrow"
+                android:text="@{article.publishedDate}"
+                android:fontFamily="@font/roboto_light"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"/>
+
+        <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_arrow"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/content_arrow_image"
+            />
+    </RelativeLayout>
+</layout>

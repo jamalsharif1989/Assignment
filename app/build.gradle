@@ -1,0 +1,124 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "org.sonarqube"
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.android.articleapp"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sonarqube {
+        properties {
+            property "sonar.projectName", "ArticleApplication" // Name of your project
+            property "sonar.projectKey", "assignment123" // Name of your project
+            property "sonar.projectVersion", "1.0.0" // Version of your project
+            property "sonar.projectDescription", "Assignment"
+            property "sonar.sources", "src/main/java" // add which ever you want
+            property "sonar.binaries", "build/intermediates/classes/debug"
+            property "sonar.tests", "src/test/java, src/androidTest/java"
+            property "sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/jacoco/createTestReport/createTestReport.xml"
+            property "sonar.jacoco.reportPaths", "${project.buildDir}/jacoco/testDevelopmentDebugUnitTest.exec"
+            property "sonar.java.coveragePlugin", "jacoco"
+            property "sonar.junit.reportsPath", "build/test-results/testDevelopmentDebugUnitTest"
+            property "sonar.host.url", "http://localhost:9000"
+            property "sonar.login", "5a86ac40650ce2518c57807abb531e55cd0a437e"
+        }
+    }
+}
+
+dependencies {
+
+    final RETROFIT_VERSION = '2.3.0'
+    final DAGGER_VERSION = '2.21'
+    final LOTTIE_ANDROID_VERSION = '3.1.0'
+    final BINDING_COLLECTION_ADAPTER = '3.1.1'
+
+    implementation fileTree(include: ['*.aar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Support library
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.google.android.material:material:1.2.1'
+
+    // Android Architecture Components
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0'
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.4.1'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:4.4.1'
+
+    // RxJava / RxAndroid / RxKotlin
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex:rxkotlin:2.0.0-RC1'
+
+    // Dagger 2
+    implementation "com.google.dagger:dagger:$DAGGER_VERSION"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
+    kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
+
+    // Timber for Logging
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    //Animation view
+    implementation "com.airbnb.android:lottie:$LOTTIE_ANDROID_VERSION"
+
+    // Unit tests - espresso
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+
+    // DataBinding collection adapter
+    implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$BINDING_COLLECTION_ADAPTER"
+    implementation "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$BINDING_COLLECTION_ADAPTER"
+
+
+    implementation 'com.squareup.okhttp3:okhttp:4.4.1'
+
+    implementation 'org.jsoup:jsoup:1.10.2'
+
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    implementation "androidx.navigation:navigation-fragment-ktx:2.2.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.2.0"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+
+}
