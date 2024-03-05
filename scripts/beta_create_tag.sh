@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -ex
+git fetch origin
 
 offset=${1:0} # first parameter with default value 0
 year=$(date +%y)
